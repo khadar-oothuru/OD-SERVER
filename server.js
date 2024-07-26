@@ -1,23 +1,26 @@
+// Import required modules
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 
+// Initialize the Express app
 const app = express();
+const port = 3000; // Define the port your server will listen on
 
-// Middleware
+// Use body-parser middleware to parse JSON requests
 app.use(bodyParser.json());
-app.use(cors());
 
-// Connect to MongoDB
-// mongoose.connect('mongodb://localhost:27017/milk-management', { useNewUrlParser: true, useUnifiedTopology: true });
+// Define a simple route
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
 
-// Routes
-// const authRoutes = require('./routes/auth');
-// const transactionRoutes = require('./routes/transactions');
+// Define another route to handle POST requests
+app.post('/data', (req, res) => {
+  const data = req.body;
+  res.send(`Received data: ${JSON.stringify(data)}`);
+});
 
-// app.use('/api/auth', authRoutes);
-// app.use('/api/transactions', transactionRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});
